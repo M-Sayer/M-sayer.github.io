@@ -1,0 +1,66 @@
+<!-- Load TensorFlow.js. This is required to use MobileNet. -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
+<!-- Load the MobileNet model. -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
+
+<header style="margin-bottom: 25px;">
+  <a style="margin-right: 20px;" href="/index.html">Image Uploader</a>
+
+  <a href="/graphs.html">Graphs</a>
+</header>
+
+<body>
+  <div>
+    Welcome to the Pet image uploader. Choose a local image file of your favorite pet. 
+    Once you upload the image, our app will identify the type of pet for you automatically.
+  </div>
+
+  <input id="imageFile" onchange="onImageSelected()" type="file" accept="image/*">
+
+  <img id="img" height="200">
+
+  <div style="margin-top: 20px; margin-bottom: 20px;">
+    <button onclick="imageParse()">upload image</button>
+  </div>
+
+  <div id="prediction"></div>
+</body>
+
+<script>
+  // Notice there is no 'import' statement. 'mobilenet' and 'tf' is
+  // available on the index-page because of the script tag above.
+  
+  const onImageSelected = () => {
+    const file = document.getElementById('imageFile').files[0]
+    const imgTag = document.getElementById('img')
+
+    imgTag.title = file.name
+
+    const reader = new FileReader()
+    
+    reader.onload = () => {
+      imgTag.src = reader.result
+    }
+
+    reader.readAsDataURL(file)
+  }
+
+  const imageParse = () => {
+  document.getElementById('prediction').innerHTML = 'Loading...'
+
+  const img = document.getElementById('img');
+
+    // Load the model.
+    mobilenet.load().then(model => {
+      // Classify the image.
+      model.classify(img).then(predictions => {
+        const prediction = predictions[0]
+        const name = prediction.className
+        const probability = prediction.probability
+
+        document.getElementById('prediction').innerHTML = `type: ${name}. probability: ${probability}`
+      });
+    });
+  }
+</script>
+

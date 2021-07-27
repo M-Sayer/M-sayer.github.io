@@ -1,0 +1,131 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<header>
+  <a style="margin-right: 20px;" href="/index.html">Image Uploader</a>
+
+  <a href="/graphs.html">Graphs</a>
+</header>
+
+<body>
+  <div>
+    <canvas id="barChart"></canvas>
+  </div>
+
+  <div>
+    <canvas id="donutChart"></canvas>
+  </div>
+
+  <div>
+    <canvas id="lineChart"></canvas>
+  </div>
+</body>
+
+<script>
+  const labels = [
+    'Cats',
+    'Dogs',
+    'Hamsters',
+    'Rabbits',
+  ]
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'Average monthly uploads of most popular pets',
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+      ],
+      borderWidth: 1,
+      data: [5000, 10000, 2000, 1000],
+    }]
+  };
+
+  const config = {
+    type: 'bar',
+    data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+
+  var myChart = new Chart(
+    document.getElementById('barChart'),
+    config
+  );
+
+  // DONUT
+
+  const donutData = {
+    labels: [
+      'Dogs',
+      'Cats',
+      'Fish',
+      'Reptiles',
+      'Hamsters',
+      'Rabbits',
+      'Ferrets',
+      'Llamas'
+    ],
+    datasets: [{
+      label: 'Total pet data',
+      data: [500000, 300000, 100000, 30000, 15000, 12000, 3000, 1000],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)',
+        'rgb(51, 255, 255)',
+        'rgb(255, 204, 229)',
+        'rgb(255, 0, 255)',
+        'rgb(0, 0, 0)',
+        'rgb(255, 128, 0)',
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+  const donutConfig = {
+    type: 'doughnut',
+    data: donutData,
+  };
+
+  var donutChart = new Chart(
+    document.getElementById('donutChart'),
+    donutConfig
+  );
+
+  // LINE
+
+  const lineData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [{
+      label: 'Growth of total number pets in dataset',
+      data: [100000, 175000, 250000, 300000, 400000, 550000, 750000],
+      fill: false,
+      borderColor: 'rgb(75, 192, 192)',
+      tension: 0.1
+    }]
+  };
+
+  const lineConfig = {
+    type: 'line',
+    data: lineData,
+  };
+  
+  var lineChart = new Chart(
+    document.getElementById('lineChart'),
+    lineConfig
+  );
+</script>
