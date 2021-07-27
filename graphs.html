@@ -8,15 +8,18 @@
 
 <body>
   <div>
-    <canvas id="barChart"></canvas>
-  </div>
-
-  <div>
-    <canvas id="donutChart"></canvas>
-  </div>
-
-  <div>
-    <canvas id="lineChart"></canvas>
+    <div>
+      <canvas style="margin-bottom: 25px; position: relative; width: 80vw; height: 40vh;" id="donutChart"></canvas>
+    </div>
+    
+    <div>
+      <canvas style="margin-bottom: 25px; position: relative; width: 80vw; height: 40vh;" id="barChart"></canvas>
+    </div>
+  
+  
+    <div>
+      <canvas style="margin-bottom: 25px; position: relative; width: 80vw; height: 40vh;" id="lineChart"></canvas>
+    </div>
   </div>
 </body>
 
@@ -80,7 +83,7 @@
       'Llamas'
     ],
     datasets: [{
-      label: 'Total pet data',
+      label: 'Composition of total pet data',
       data: [500000, 300000, 100000, 30000, 15000, 12000, 3000, 1000],
       backgroundColor: [
         'rgb(255, 99, 132)',
@@ -99,6 +102,9 @@
   const donutConfig = {
     type: 'doughnut',
     data: donutData,
+    options: {
+      aspectRatio: 3
+    }
   };
 
   var donutChart = new Chart(
